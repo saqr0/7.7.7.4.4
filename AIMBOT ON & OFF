@@ -1,0 +1,51 @@
+using UnityEngine;
+using System.Collections;
+using System.Net;
+using System.IO;
+using Newtonsoft.Json.Linq;
+{
+    public static JObject settings;
+
+    void Start()
+    {
+        StartCoroutine(LoadSettings());
+    }
+
+    IEnumerator LoadSettings()
+    {
+        string url = "https://github.dev/saqr0/7.7.7.4.4/blob/master/Confg50%Call50%of%50duty%50MobileMyUrlhttp://8.8.8.8/aimbot.com"; // 
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
+        using (StreamReader reader = new StreamReader(response.GetResponseStream()))
+        {
+            string json = reader.ReadToEnd();
+            settings = JObject.Parse(json);
+        }
+
+        yield return null;
+    }
+}
+{
+  "aimbot": {
+    "enabled": true,
+    "fov": 360,
+    "smoothness": 0.08
+  }
+  "magic_bullet": {
+    "enabled": true,
+    "penetration": true,
+    "damage_multiplier":2 .50
+  }
+}
+void Update()
+{
+    if (AimbotLoader.settings != null)
+    {
+        bool aimEnabled = (bool)AimbotLoader.settings["aimbot"]["enabled"];
+        float aimFov=360(float)AimbotLoader.settings["aimbot"]["fov"];
+        float smooth = (float)AimbotLoader.settings["aimbot"]["smoothness"];
+
+    }
+
+}
